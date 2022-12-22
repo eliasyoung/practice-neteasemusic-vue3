@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h1>Home</h1>
-    <p>This is Home!</p>
-  </div>
+  <div>This is a Test page</div>
 </template>
 
 <script setup lang="ts">
