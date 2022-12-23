@@ -6,9 +6,10 @@ const TestView = () => import("@/views/TestView.vue");
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/", component: HomeView },
+    { path: "/", redirect: "discover" },
+    { path: "/discover", component: HomeView },
     {
-      path: "/about",
+      path: "/video",
       component: TestView,
     },
   ],

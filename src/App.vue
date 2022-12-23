@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import TheHeader from "@/components/header/TheHeader.vue";
-import AsideMenu from "@/components/AsideMenu.vue";
+import AsideMenu from "@/components/aside-menu/AsideMenu.vue";
 import FooterPlayer from "@/components/FooterPlayer.vue";
 </script>
 

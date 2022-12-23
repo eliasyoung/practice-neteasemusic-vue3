@@ -3,6 +3,8 @@
   --primary-background-color: #ffffff;
   --primary-gray-color: #f6f6f8;
   --primary-border-color: #e1e1e1;
+  --primary-route-font-color: #373737;
+  --primary-hover-route-font-color: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
