@@ -34,7 +34,6 @@ import HeaderUserInfo from "./HeaderUserInfo.vue";
   background-color: var(--primary-theme-color);
   display: flex;
   justify-content: space-between;
-
   .left-wrapper {
     margin-left: 5px;
     height: 100%;

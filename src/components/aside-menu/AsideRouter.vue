@@ -6,7 +6,7 @@
         v-for="route in routeList"
         :key="route.to"
         @click="routeOnClick(route.to)"
-        :class="{ bold: isBold, active: $route.path === route.to }"
+        :class="{ bold: isBold, active: $route.path.indexOf(route.to) == 0 }"
       >
         <SvgIcon v-if="route.icon" :iconName="route.icon" />
         <span>{{ route.title }}</span>
@@ -19,11 +19,11 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 
-type routeType = {
+interface routeType {
   title: string;
   to: string;
   icon?: string;
-};
+}
 
 const props = withDefaults(
   defineProps<{
@@ -71,6 +71,9 @@ const isBold = computed(() => {
       align-items: center;
       &.active {
         background-color: var(--primary-gray-color);
+        &:hover {
+          color: var(--primary-route-font-color);
+        }
       }
       &.bold {
         font-size: 15px;
@@ -81,6 +84,7 @@ const isBold = computed(() => {
       }
       &:hover {
         background-color: var(--primary-gray-color);
+        color: var(--primary-hover-route-font-color);
       }
       span {
         margin-left: 8px;
