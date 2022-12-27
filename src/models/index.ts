@@ -6,3 +6,11 @@ export interface banner {
   url: string;
   typeTitle: string;
 }
+
+export interface songlistInfo {
+  id: number;
+  name: string;
+  picUrl: string;
+  playCount: number /*播放量 */;
+  trackCount: number /* 歌单歌曲数目 */;
+}

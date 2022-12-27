@@ -21,6 +21,17 @@ html {
 *::after {
   box-sizing: border-box;
   margin: 0;
+  overflow: hidden;
+}
+
+*::-webkit-scrollbar {
+  background-color: var(--primary-background-color);
+  width: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--primary-border-color);
+  border-radius: 10px;
 }
 
 a {

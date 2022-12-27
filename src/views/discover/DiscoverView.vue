@@ -1,6 +1,6 @@
 <template>
   <BaseNavbar :navs="navs" />
-  <BaseContainer>
+  <BaseContainer style="height: calc(100vh - 193px)">
     <RouterView v-slot="{ Component }">
       <template v-if="Component">
         <Suspense>

@@ -163,6 +163,7 @@ ul {
       position: absolute;
       bottom: 0;
       right: 0;
+      line-height: 1em;
       padding: 5px 10px;
       white-space: nowrap;
       font-size: 12px;
@@ -210,6 +211,7 @@ ul {
   display: flex;
   justify-content: center;
   gap: 10px;
+  padding: 0;
   padding-top: 4px;
   li {
     background-color: #e6e6e6;

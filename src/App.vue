@@ -26,9 +26,11 @@ import FooterPlayer from "@/components/FooterPlayer.vue";
   .center-container {
     flex: 1;
     display: flex;
+    // overflow: hidden;
 
     main {
       flex: 1;
+      // overflow: hidden;
     }
   }
 }

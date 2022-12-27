@@ -11,7 +11,7 @@ const TestView = () => import("@/views/TestView.vue");
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/", redirect: "discover" },
+    { path: "/", redirect: "/discover", },
     {
       path: "/discover",
       component: DiscoverView,
