@@ -4,4 +4,5 @@ export interface banner {
   targetType: number;
   titleColor: string;
   url: string;
+  typeTitle: string;
 }

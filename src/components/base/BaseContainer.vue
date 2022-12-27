@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="base-container">
     <div>
       <slot></slot>
     </div>
@@ -9,7 +9,7 @@
 <script setup lang="ts"></script>
 
 <style lang="less" scoped>
-div {
+.base-container {
   padding: 0 30px;
   > div {
     max-width: 1100px;

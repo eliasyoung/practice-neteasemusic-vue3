@@ -1,16 +1,14 @@
 <template>
   <div>
-    <h1>Discover Page</h1>
-    <p>This is Discover Page.</p>
+    <DiscoverCarousel :banners="banners" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { getBanner } from "@/api/api";
+import DiscoverCarousel from "@/components/header/discover/carousel/DiscoverCarousel.vue";
 
-const result = await getBanner();
-
-console.log(result);
+const { banners } = await getBanner();
 </script>
 
 <style lang="less" scoped></style>
