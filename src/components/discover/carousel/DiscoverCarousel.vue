@@ -1,46 +1,50 @@
 <template>
-  <ul
-    ref="wrapperEl"
-    class="carousels-wrapper"
-    :style="{ height: height + 'px' }"
-    @mouseenter="stopAutoSlide"
-    @mouseleave="startAutoSlide"
-  >
-    <li
-      v-for="(banner, index) in banners"
-      class="carousel-item"
-      :class="{
-        'in-stage': !(inStageIndex.indexOf(index) < 0),
-        active: index === activeIndex,
-      }"
-      :style="itemStyle(index)"
-      @click="carouselItemOnClick(banner, index)"
-    >
-      <img :src="banner.imageUrl" />
-      <div
-        class="carousel-item-type"
-        :style="{ backgroundColor: `var(--banner-type-${banner.titleColor})` }"
-      >
-        {{ banner.typeTitle }}
-      </div>
-    </li>
-    <button @click="changeActiveIndex(-1)">
-      <SvgIcon iconName="icon-arrow-left-bold" />
-    </button>
-    <button @click="changeActiveIndex(1)">
-      <SvgIcon iconName="icon-arrow-right-bold" />
-    </button>
-  </ul>
-  <ul class="indicators-wrapper">
-    <li
-      v-for="(indicator, index) in banners.length"
-      :key="index"
-      :class="{ active: index === activeIndex }"
-      @mouseover="activeIndex = index"
+  <div>
+    <ul
+      ref="wrapperEl"
+      class="carousels-wrapper"
+      :style="{ height: height + 'px' }"
       @mouseenter="stopAutoSlide"
       @mouseleave="startAutoSlide"
-    ></li>
-  </ul>
+    >
+      <li
+        v-for="(banner, index) in banners"
+        class="carousel-item"
+        :class="{
+          'in-stage': !(inStageIndex.indexOf(index) < 0),
+          active: index === activeIndex,
+        }"
+        :style="itemStyle(index)"
+        @click="carouselItemOnClick(banner, index)"
+      >
+        <img v-lazyImg="banner.imageUrl" />
+        <div
+          class="carousel-item-type"
+          :style="{
+            backgroundColor: `var(--banner-type-${banner.titleColor})`,
+          }"
+        >
+          {{ banner.typeTitle }}
+        </div>
+      </li>
+      <button @click="changeActiveIndex(-1)">
+        <SvgIcon iconName="icon-arrow-left-bold" />
+      </button>
+      <button @click="changeActiveIndex(1)">
+        <SvgIcon iconName="icon-arrow-right-bold" />
+      </button>
+    </ul>
+    <ul class="indicators-wrapper">
+      <li
+        v-for="(indicator, index) in banners.length"
+        :key="index"
+        :class="{ active: index === activeIndex }"
+        @mouseover="activeIndex = index"
+        @mouseenter="stopAutoSlide"
+        @mouseleave="startAutoSlide"
+      ></li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -158,6 +162,7 @@ ul {
       border-radius: 10px;
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
     .carousel-item-type {
       position: absolute;

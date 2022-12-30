@@ -41,7 +41,7 @@ import {
   getPrivateContent,
   getNewSong,
 } from "@/api/api";
-import DiscoverCarousel from "@/components/header/discover/carousel/DiscoverCarousel.vue";
+import DiscoverCarousel from "@/components/discover/carousel/DiscoverCarousel.vue";
 import NewSongItem from "@/components/NewSongItem.vue";
 import type { banner, songlistInfo, privateContent, songInfo } from "@/models";
 

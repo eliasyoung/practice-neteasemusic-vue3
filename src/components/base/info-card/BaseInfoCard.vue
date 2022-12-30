@@ -1,7 +1,7 @@
 <template>
   <div class="songlist-info-card" :style="{ maxWidth: calcCardMaxWidth }">
     <div class="info-card-img-container" @click="cardOnClick(id)">
-      <img :src="picUrl" />
+      <img v-lazyImg="picUrl" />
     </div>
     <a @click="cardOnClick(id)">{{ name }}</a>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="newsong-item-container" :style="{ maxWidth }">
-    <img :src="itemInfo.picUrl" />
+    <img v-lazyImg="itemInfo.picUrl" />
     <div class="newsong-item-info">
       <p class="newsong-title">
         {{ itemInfo.name
@@ -44,6 +44,7 @@ const artistNameOnClick = (id: number) => {
   user-select: none;
   img {
     flex: 0 0 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 5px;
     border: 1px solid var(--primary-border-color);
