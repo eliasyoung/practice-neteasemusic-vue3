@@ -1,7 +1,9 @@
 <template>
   <ul>
     <li
-      :class="{ active: index === currentActiveNav }"
+      :class="{
+        active: index === currentActiveNav,
+      }"
       v-for="(nav, index) in navs"
       :key="index"
       @click="liClickHandler(index, nav)"
@@ -12,31 +14,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { useBaseNavbar } from "./index";
+import type { baseNavType } from "@/models";
 
-interface navType {
-  title: string;
-  to?: string;
-}
+const props = defineProps<{
+  navs: baseNavType[];
+  routeNav?: boolean;
+}>();
 
-const props = defineProps<{ navs: navType[] }>();
-const router = useRouter();
-
-const currentActiveNav = ref(0);
-
-const liClickHandler = (index: number, nav: navType) => {
-  changeActiveIndex(index);
-  if (nav.to) pushRouterPath(nav.to);
-};
-
-const changeActiveIndex = (index: number) => {
-  currentActiveNav.value = index;
-};
-
-const pushRouterPath = (to: string) => {
-  router.push(to);
-};
+const { currentActiveNav, liClickHandler } = useBaseNavbar(props);
 </script>
 
 <style lang="less" scoped>

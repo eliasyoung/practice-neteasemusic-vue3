@@ -31,6 +31,33 @@
       <NewSongItem v-for="item in newSong" :key="item.id" :item-info="item" />
     </div>
   </BaseContent>
+  <baseContent title="推荐MV" link>
+    <div class="flex w-100 flex-wrap" style="gap: 18px">
+      <BaseInfoCard
+        v-for="item in mv"
+        :key="item.id"
+        :id="item.id"
+        :name="item.name"
+        :picUrl="item.picUrl"
+        :column="4"
+      >
+        <template #title>
+          <div style="white-space: nowrap; text-overflow: ellipsis">
+            {{ item.name }}
+          </div>
+        </template>
+        <template #artist>
+          <BaseArtistName
+            :artists="item.artists"
+            name-class="newsong-artist-name"
+            color="#9f9f9f"
+            pointer
+            style="margin-top: 3px"
+          />
+        </template>
+      </BaseInfoCard>
+    </div>
+  </baseContent>
 </template>
 
 <script setup lang="ts">
@@ -40,38 +67,50 @@ import {
   getPersonalized,
   getPrivateContent,
   getNewSong,
+  getPersonalizedMv,
 } from "@/api/api";
 import DiscoverCarousel from "@/components/discover/carousel/DiscoverCarousel.vue";
 import NewSongItem from "@/components/NewSongItem.vue";
-import type { banner, songlistInfo, privateContent, songInfo } from "@/models";
+import type {
+  banner,
+  songlistInfo,
+  privateContent,
+  songInfo,
+  mvInfo,
+} from "@/models";
+import BaseArtistName from "@/components/base/BaseArtistName.vue";
 
 const banners = ref<banner[]>();
 const personalized = ref<songlistInfo[]>();
 const privateContent = ref<privateContent[]>();
 const newSong = ref<songInfo[]>();
+const mv = ref<mvInfo[]>();
 
 const fetchPageData = async () => {
   const getBannerPromise = getBanner();
   const getPersonalizedPromise = getPersonalized(10);
   const getPrivateContentPromise = getPrivateContent();
-  const newSongDataPromise = await getNewSong(12);
-
+  const getNewSongPromise = await getNewSong(12);
+  const getPersonalizedMvPromise = await getPersonalizedMv();
   try {
     const [
       { banners: bannersResult },
       { result: personalizedResult },
       { result: privateContentResult },
       { result: newSongResult },
+      { result: mvResult },
     ] = await Promise.all([
       getBannerPromise,
       getPersonalizedPromise,
       getPrivateContentPromise,
-      newSongDataPromise,
+      getNewSongPromise,
+      getPersonalizedMvPromise,
     ]);
     banners.value = bannersResult;
     personalized.value = personalizedResult;
     privateContent.value = privateContentResult;
     newSong.value = newSongResult;
+    mv.value = mvResult;
   } catch (err) {
     console.log(err);
   }

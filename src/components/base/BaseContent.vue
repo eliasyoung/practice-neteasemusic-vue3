@@ -23,6 +23,7 @@ const props = withDefaults(defineProps<{ title?: string; link?: boolean }>(), {
 <style lang="less" scoped>
 .base-content {
   padding: 10px 0;
+  margin-bottom: 10px;
   .content-header {
     font-size: 20px;
     font-weight: bold;

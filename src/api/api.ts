@@ -1,7 +1,13 @@
 import http from "@/api/http";
 
 /* types */
-import type { banner, songlistInfo, privateContent, songInfo } from "@/models";
+import type {
+  banner,
+  songlistInfo,
+  privateContent,
+  songInfo,
+  mvInfo,
+} from "@/models";
 
 export const getBanner = () => {
   return http.get<{ banners: banner[]; code: number }>("/banner");
@@ -23,4 +29,8 @@ export const getNewSong = (limit?: number) => {
     "/personalized/newsong",
     { limit }
   );
+};
+
+export const getPersonalizedMv = () => {
+  return http.get<{ result: mvInfo[]; code: number }>("/personalized/mv");
 };

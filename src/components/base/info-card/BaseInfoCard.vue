@@ -3,7 +3,12 @@
     <div class="info-card-img-container" @click="cardOnClick(id)">
       <img v-lazyImg="picUrl" />
     </div>
-    <a @click="cardOnClick(id)">{{ name }}</a>
+    <a @click="cardOnClick(id)">
+      <slot name="title">
+        {{ name }}
+      </slot>
+    </a>
+    <slot name="artist"></slot>
   </div>
 </template>
 
@@ -38,14 +43,17 @@ const cardOnClick = (id: number) => {
   flex-direction: column;
   // max-width: calc(20% - 15px);
   .info-card-img-container {
+    // flex: 1;
+    border-radius: 8px;
     img {
       width: 100%;
+      height: 100%;
       vertical-align: bottom;
       // height: 100%;
       // width: 205px;
       // height: 205px;
       object-fit: cover;
-      border-radius: 5px;
+      // border-radius: 5px;
       cursor: pointer;
       border: 1px solid var(--primary-border-color);
     }

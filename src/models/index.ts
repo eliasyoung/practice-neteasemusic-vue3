@@ -42,3 +42,13 @@ export interface album extends baseInfo {
 }
 
 export interface artist extends baseInfo {}
+
+export interface mvInfo extends baseInfo {
+  artists: artist[];
+  playCount: number;
+}
+
+export interface baseNavType {
+  title: string;
+  to?: string;
+}

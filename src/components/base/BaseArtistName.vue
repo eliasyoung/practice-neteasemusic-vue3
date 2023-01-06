@@ -41,9 +41,11 @@ const nameOnClickHander = (id: number) => {
   list-style: none;
   font-size: 12px;
   color: black;
+  white-space: nowrap;
   text-overflow: ellipsis;
   li {
     display: inline;
+    line-height: 1em;
     .cursor-pointer {
       cursor: pointer;
     }

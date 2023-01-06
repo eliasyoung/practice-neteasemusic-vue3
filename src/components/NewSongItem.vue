@@ -14,7 +14,7 @@
         color="#9f9f9f"
         pointer
         @name-on-click="artistNameOnClick"
-        style="margin-top: 5px"
+        style="margin-top: 8px"
       />
     </div>
   </div>
@@ -42,6 +42,7 @@ const artistNameOnClick = (id: number) => {
   max-height: 50px;
   border-radius: 5px;
   user-select: none;
+  width: 100%;
   img {
     flex: 0 0 50px;
     height: 50px;

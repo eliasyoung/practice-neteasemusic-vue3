@@ -1,5 +1,5 @@
 <template>
-  <BaseNavbar :navs="navs" />
+  <BaseNavbar :navs="navs" route-nav />
   <BaseContainer style="height: calc(100vh - 193px)">
     <RouterView v-slot="{ Component }">
       <template v-if="Component">
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import BaseNavbar from "@/components/base/BaseNavbar.vue";
+import BaseNavbar from "@/components/base/navbar/BaseNavbar.vue";
 
 const navs = ref([
   { title: "个性推荐", to: "/discover" },
