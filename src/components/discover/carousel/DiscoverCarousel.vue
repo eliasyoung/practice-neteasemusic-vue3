@@ -7,26 +7,17 @@
       @mouseenter="stopAutoSlide"
       @mouseleave="startAutoSlide"
     >
-      <li
+      <DiscoverCarouselItem
         v-for="(banner, index) in banners"
         class="carousel-item"
+        :banner="banner"
         :class="{
           'in-stage': !(inStageIndex.indexOf(index) < 0),
           active: index === activeIndex,
         }"
         :style="itemStyle(index)"
         @click="carouselItemOnClick(banner, index)"
-      >
-        <img v-lazyImg="banner.imageUrl" />
-        <div
-          class="carousel-item-type"
-          :style="{
-            backgroundColor: `var(--banner-type-${banner.titleColor})`,
-          }"
-        >
-          {{ banner.typeTitle }}
-        </div>
-      </li>
+      />
       <button @click="changeActiveIndex(-1)">
         <SvgIcon iconName="icon-arrow-left-bold" />
       </button>
@@ -36,7 +27,7 @@
     </ul>
     <ul class="indicators-wrapper">
       <li
-        v-for="(indicator, index) in banners.length"
+        v-for="index in banners.length"
         :key="index"
         :class="{ active: index === activeIndex }"
         @mouseover="activeIndex = index"
@@ -49,88 +40,29 @@
 
 <script setup lang="ts">
 import type { banner } from "@/models";
-import { ref, computed, watch, onMounted } from "vue";
-
-const ro = new ResizeObserver((entries) => {
-  for (let entry of entries) {
-    // const cr = entry.contentRect;
-    // console.log("Element:", entry.target);
-    // console.log(`Element size: ${cr.width}px x ${cr.height}px`);
-    // console.log(`Element padding: ${cr.top}px ; ${cr.left}px`);
-    if (entry.target instanceof HTMLElement)
-      ulOffsetWidth.value = entry.target.offsetWidth;
-  }
-});
-
-const timer = ref<number | null>();
+import { ref } from "vue";
+import { useInitCarousel, useCarouselResizeObserver } from ".";
+import DiscoverCarouselItem from "./DiscoverCarouselItem.vue";
 
 const props = withDefaults(
   defineProps<{ banners: banner[]; height?: number }>(),
   { height: 200 }
 );
 
-const ITEM_SCALE = 0.82;
-
 const wrapperEl = ref<HTMLUListElement>();
 
-watch(wrapperEl, (newUl) => {
-  if (newUl instanceof HTMLUListElement) ro.observe(newUl);
-});
+const {
+  activeIndex,
+  ulOffsetWidth,
+  inStageIndex,
+  changeActiveIndex,
+  startAutoSlide,
+  stopAutoSlide,
+  carouselItemOnClick,
+  itemStyle,
+} = useInitCarousel(props);
 
-const ulOffsetWidth = ref(1100);
-
-const activeIndex = ref(0);
-
-const prevIndex = computed(() => {
-  const index = activeIndex.value;
-  return index === 0 ? props.banners.length - 1 : index - 1;
-});
-
-const nextIndex = computed(() => {
-  const index = activeIndex.value;
-  return index === props.banners.length - 1 ? 0 : index + 1;
-});
-
-const itemStyle = (index: number) => {
-  if (index === prevIndex.value)
-    return `transform: translateX(calc(0px - 18% / 2)) scale(${ITEM_SCALE});`;
-  else if (index === nextIndex.value)
-    return `transform: translateX(calc(${ulOffsetWidth.value}px - 100% + 18% / 2)) scale(${ITEM_SCALE});`;
-  else if (index === activeIndex.value)
-    return `transform: translateX(calc((${ulOffsetWidth.value}px - 100%)/2)) scale(1);`;
-  else
-    return `transform: translateX(calc((${ulOffsetWidth.value}px - 100%)/2)) scale(${ITEM_SCALE});`;
-};
-
-const inStageIndex = computed<number[]>(() => [
-  prevIndex.value,
-  activeIndex.value,
-  nextIndex.value,
-]);
-
-const changeActiveIndex = (step: number) => {
-  activeIndex.value = inStageIndex.value[1 + step];
-};
-
-const startAutoSlide = () => {
-  timer.value = setInterval(() => {
-    changeActiveIndex(1);
-  }, 5000);
-};
-
-const stopAutoSlide = () => {
-  if (timer.value) clearInterval(timer.value);
-};
-
-const carouselItemOnClick = (banner: banner, index: number): void => {
-  if (index === activeIndex.value) {
-    console.log(banner);
-  }
-};
-
-onMounted(() => {
-  startAutoSlide();
-});
+useCarouselResizeObserver(ulOffsetWidth, wrapperEl);
 </script>
 
 <style lang="less" scoped>

@@ -6,8 +6,6 @@ export function useBaseNavbar(props: {
   navs: baseNavType[];
   routeNav?: boolean;
 }) {
-  console.log(props);
-
   const router = useRouter();
   const route = useRoute();
 

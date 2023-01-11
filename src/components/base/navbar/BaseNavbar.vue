@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { useBaseNavbar } from "./index";
+import { useBaseNavbar } from "./";
 import type { baseNavType } from "@/models";
 
 const props = defineProps<{
