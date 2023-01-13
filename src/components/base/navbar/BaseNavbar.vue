@@ -35,11 +35,12 @@ ul {
   height: 60px;
   list-style-type: none;
   padding: 20px 30px;
-  gap: 24px;
+  // gap: 24px;
   li {
     position: relative;
     cursor: pointer;
     color: var(--primary-route-font-color);
+    margin-right: 24px;
     &:hover {
       color: var(--primary-hover-route-font-color);
     }
@@ -57,6 +58,9 @@ ul {
         border-radius: 20px;
         transform: translate(-50%, 5px);
       }
+    }
+    &:nth-last-of-type(1) {
+      margin-right: 0;
     }
   }
 }

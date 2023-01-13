@@ -1,61 +1,39 @@
 <template>
   <DiscoverCarousel v-if="banners" :banners="banners" />
   <BaseContent title="推荐歌单" link>
-    <div class="flex w-100 flex-wrap" style="gap: 22px 18px">
-      <BaseInfoCard
-        v-for="item in personalized"
-        :key="item.id"
-        :id="item.id"
-        :name="item.name"
-        :picUrl="item.picUrl"
-      />
+    <div class="grid personalized-container w-100">
+      <div v-for="item in personalized" :key="item.id">
+        <BaseCoverImage :pic-url="item.picUrl" />
+        <BaseCoverTitle :name="item.name" />
+      </div>
     </div>
   </BaseContent>
   <BaseContent title="独家放送" link>
-    <div class="flex w-100 flex-wrap" style="gap: 22px 18px">
-      <BaseInfoCard
-        v-for="item in privateContent"
-        :key="item.id"
-        :id="item.id"
-        :name="item.name"
-        :picUrl="item.sPicUrl"
-        :column="3"
-      />
+    <div class="grid private-content-container w-100">
+      <div v-for="item in privateContent" :key="item.id">
+        <BaseCoverImage :pic-url="item.sPicUrl" />
+        <BaseCoverTitle :name="item.name" />
+      </div>
     </div>
   </BaseContent>
   <BaseContent title="最新音乐" link>
-    <div
-      class="flex w-100 flex-wrap flex-column"
-      style="gap: 16px 10px; max-height: 250px"
-    >
+    <div class="grid newsong-container w-100 grid-column" style="">
       <NewSongItem v-for="item in newSong" :key="item.id" :item-info="item" />
     </div>
   </BaseContent>
   <baseContent title="推荐MV" link>
-    <div class="flex w-100 flex-wrap" style="gap: 18px">
-      <BaseInfoCard
-        v-for="item in mv"
-        :key="item.id"
-        :id="item.id"
-        :name="item.name"
-        :picUrl="item.picUrl"
-        :column="4"
-      >
-        <template #title>
-          <div style="white-space: nowrap; text-overflow: ellipsis">
-            {{ item.name }}
-          </div>
-        </template>
-        <template #artist>
-          <BaseArtistName
-            :artists="item.artists"
-            name-class="newsong-artist-name"
-            color="#9f9f9f"
-            pointer
-            style="margin-top: 3px"
-          />
-        </template>
-      </BaseInfoCard>
+    <div class="grid mv-container w-100">
+      <div v-for="item in mv" :key="item.id">
+        <BaseCoverImage :picUrl="item.picUrl" style="height: 135px" />
+        <BaseCoverTitle :name="item.name" oneLine />
+        <BaseCoverArtist
+          :artists="item.artists"
+          name-class="newsong-artist-name"
+          color="#9f9f9f"
+          pointer
+          style="margin-top: 3px"
+        />
+      </div>
     </div>
   </baseContent>
 </template>
@@ -78,7 +56,6 @@ import type {
   songInfo,
   mvInfo,
 } from "@/models";
-import BaseArtistName from "@/components/base/BaseArtistName.vue";
 
 const banners = ref<banner[]>();
 const personalized = ref<songlistInfo[]>();
@@ -120,6 +97,31 @@ fetchPageData();
 </script>
 
 <style lang="less" scoped>
+.personalized-container {
+  gap: 22px 18px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.private-content-container {
+  gap: 18px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.newsong-container {
+  gap: 16px 10px;
+  max-height: 250px;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.mv-container {
+  gap: 18px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-column {
+  grid-auto-flow: column;
+}
 .flex {
   display: flex;
 }
@@ -142,5 +144,9 @@ fetchPageData();
 
 .flex-column {
   flex-direction: column;
+}
+
+.grid {
+  display: grid;
 }
 </style>

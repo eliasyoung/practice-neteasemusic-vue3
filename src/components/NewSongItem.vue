@@ -1,14 +1,15 @@
 <template>
-  <div class="newsong-item-container" :style="{ maxWidth }">
-    <img v-lazyImg="itemInfo.picUrl" />
+  <div class="newsong-item-container">
+    <BaseCoverImage :picUrl="itemInfo.picUrl" style="flex: 0 0 50px" />
     <div class="newsong-item-info">
-      <p class="newsong-title">
-        {{ itemInfo.name
-        }}<span class="newsong-alias" v-for="alias in itemInfo.song.alias">{{
-          `（${alias}）`
-        }}</span>
-      </p>
-      <BaseArtistName
+      <BaseCoverTitle
+        :name="itemInfo.name"
+        :aliases="itemInfo.song.alias"
+        :font-size="13"
+        one-line
+        style="margin-top: 0"
+      />
+      <BaseCoverArtist
         :artists="itemInfo.song.artists"
         name-class="newsong-artist-name"
         color="#9f9f9f"
@@ -21,15 +22,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
 import type { songInfo } from "@/models";
-import BaseArtistName from "@/components/base/BaseArtistName.vue";
+import BaseCoverTitle from "./base/cover-info/BaseCoverTitle.vue";
 
-const maxWidth = computed(() => {
-  return `calc(${(1 / 3) * 100}% - ${20 / 3}px)`;
-});
-
-const props = defineProps<{ itemInfo: songInfo }>();
+defineProps<{ itemInfo: songInfo }>();
 
 const artistNameOnClick = (id: number) => {
   console.log(id);

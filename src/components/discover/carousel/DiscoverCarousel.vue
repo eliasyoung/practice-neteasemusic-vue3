@@ -147,7 +147,6 @@ ul {
 .indicators-wrapper {
   display: flex;
   justify-content: center;
-  gap: 10px;
   padding: 0;
   padding-top: 4px;
   li {
@@ -155,8 +154,12 @@ ul {
     width: 6px;
     height: 6px;
     border-radius: 50%;
+    margin-right: 10px;
     &.active {
       background-color: var(--primary-theme-color);
+    }
+    &:nth-last-child(1) {
+      margin-right: 0;
     }
   }
 }
