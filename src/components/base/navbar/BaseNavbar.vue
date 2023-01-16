@@ -31,16 +31,15 @@ ul {
   flex-direction: row;
   align-items: center;
   background-color: var(--primary-background-color);
-  //   background-color: var(--primary-gray-color);
   height: 60px;
   list-style-type: none;
   padding: 20px 30px;
-  // gap: 24px;
   li {
     position: relative;
     cursor: pointer;
     color: var(--primary-route-font-color);
     margin-right: 24px;
+    overflow: visible;
     &:hover {
       color: var(--primary-hover-route-font-color);
     }

@@ -45,7 +45,11 @@ import { useInitCarousel, useCarouselResizeObserver } from ".";
 import DiscoverCarouselItem from "./DiscoverCarouselItem.vue";
 
 const props = withDefaults(
-  defineProps<{ banners: banner[]; height?: number }>(),
+  defineProps<{
+    banners: banner[];
+    height?: number;
+    divOffsetWidth?: number;
+  }>(),
   { height: 200 }
 );
 
@@ -62,7 +66,9 @@ const {
   itemStyle,
 } = useInitCarousel(props);
 
-useCarouselResizeObserver(ulOffsetWidth, wrapperEl);
+if (!props.divOffsetWidth) {
+  useCarouselResizeObserver(ulOffsetWidth, wrapperEl);
+}
 </script>
 
 <style lang="less" scoped>

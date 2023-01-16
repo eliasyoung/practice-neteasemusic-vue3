@@ -3,7 +3,6 @@ import App from "./App.vue";
 
 import "./assets/main.css";
 import "@/assets/iconfont";
-// import "@/assets/styles/style.less";
 
 import router from "./router";
 
@@ -11,7 +10,7 @@ import router from "./router";
 import SvgIcon from "@/components/SvgIcon.vue";
 import BaseContainer from "@/components/base/BaseContainer.vue";
 import BaseContent from "@/components/base/BaseContent.vue";
-import BaseCoverImage from "@/components/base/cover-info/BaseCoverImage.vue";
+import BaseCoverImage from "@/components/base/cover-info/image/BaseCoverImage.vue";
 import BaseCoverTitle from "@/components/base/cover-info/BaseCoverTitle.vue";
 import BaseCoverArtist from "@/components/base/cover-info/BaseCoverArtist.vue";
 

@@ -2,7 +2,7 @@
   <button class="header-router" :class="canGoBack ? 'available' : null">
     <SvgIcon iconName="icon-arrow-left-bold" />
   </button>
-  <button class="header-router" :class="canGoFoward ? 'available' : null">
+  <button class="header-router" :class="canGoFoward ? 'available' : null" style="margin-left: 10px">
     <SvgIcon iconName="icon-arrow-left-bold" />
   </button>
 </template>

@@ -52,7 +52,6 @@ import HeaderUserInfo from "./HeaderUserInfo.vue";
     .header-router-container {
       margin-left: 72px;
       display: flex;
-      gap: 10px;
     }
     .tinggeshiqu-container {
       background-color: #e13e3e;
@@ -62,7 +61,7 @@ import HeaderUserInfo from "./HeaderUserInfo.vue";
       font-size: 17px;
       display: flex;
       align-items: center;
-      padding: 7px 6px;
+      padding: 7px 7px;
       border-radius: 100%;
       cursor: pointer;
     }
@@ -77,6 +76,7 @@ import HeaderUserInfo from "./HeaderUserInfo.vue";
     margin-right: 16px;
     > svg {
       cursor: pointer;
+      margin-left: 10px;
       &:hover {
         color: #ffffff;
       }

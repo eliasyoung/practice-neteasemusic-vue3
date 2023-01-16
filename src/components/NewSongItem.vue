@@ -1,6 +1,10 @@
 <template>
   <div class="newsong-item-container">
-    <BaseCoverImage :picUrl="itemInfo.picUrl" style="flex: 0 0 50px" />
+    <BaseCoverImage
+      :picUrl="itemInfo.picUrl"
+      center-play
+      style="flex: 0 0 50px"
+    />
     <div class="newsong-item-info">
       <BaseCoverTitle
         :name="itemInfo.name"

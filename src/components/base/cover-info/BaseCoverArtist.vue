@@ -43,6 +43,7 @@ const nameOnClickHander = (id: number) => {
   color: black;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-weight: 300;
   li {
     display: inline;
     line-height: 1em;

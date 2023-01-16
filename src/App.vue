@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app-container">
     <TheHeader />
     <div class="center-container">
       <AsideMenu />
@@ -17,7 +17,7 @@ import FooterPlayer from "@/components/FooterPlayer.vue";
 </script>
 
 <style lang="less" scoped>
-#app {
+#app-container {
   height: 100vh;
   width: 100%;
   display: flex;

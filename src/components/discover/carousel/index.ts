@@ -16,12 +16,19 @@ export function useCarouselResizeObserver(
         ulOffsetWidth.value = entry.target.offsetWidth;
     }
   });
-  watch(wrapperEl, (newUl) => {
-    if (newUl instanceof HTMLUListElement) ro.observe(newUl);
+  const ulWatcher = watch(wrapperEl, (newUl) => {
+    if (newUl instanceof HTMLUListElement) {
+      ro.observe(newUl);
+      ulWatcher();
+    }
   });
 }
 
-export function useInitCarousel(props: { banners: banner[]; height?: number }) {
+export function useInitCarousel(props: {
+  banners: banner[];
+  height?: number;
+  divOffsetWidth?: number;
+}) {
   const timer = ref<number | null>();
   const ITEM_SCALE = 0.82;
   const ulOffsetWidth = ref(1100);
@@ -42,6 +49,11 @@ export function useInitCarousel(props: { banners: banner[]; height?: number }) {
     activeIndex.value,
     nextIndex.value,
   ]);
+
+  const offsetWidth = computed(() => {
+    if (props.divOffsetWidth) return props.divOffsetWidth;
+    else return ulOffsetWidth.value;
+  });
 
   const changeActiveIndex = (step: number) => {
     activeIndex.value = inStageIndex.value[1 + step];
@@ -67,11 +79,11 @@ export function useInitCarousel(props: { banners: banner[]; height?: number }) {
     if (index === prevIndex.value)
       return `transform: translateX(calc(0px - 18% / 2)) scale(${ITEM_SCALE});`;
     else if (index === nextIndex.value)
-      return `transform: translateX(calc(${ulOffsetWidth.value}px - 100% + 18% / 2)) scale(${ITEM_SCALE});`;
+      return `transform: translateX(calc(${offsetWidth.value}px - 100% + 18% / 2)) scale(${ITEM_SCALE});`;
     else if (index === activeIndex.value)
-      return `transform: translateX(calc((${ulOffsetWidth.value}px - 100%)/2)) scale(1);`;
+      return `transform: translateX(calc((${offsetWidth.value}px - 100%)/2)) scale(1);`;
     else
-      return `transform: translateX(calc((${ulOffsetWidth.value}px - 100%)/2)) scale(${ITEM_SCALE});`;
+      return `transform: translateX(calc((${offsetWidth.value}px - 100%)/2)) scale(${ITEM_SCALE});`;
   };
 
   onMounted(() => {

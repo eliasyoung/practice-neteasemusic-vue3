@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 /* Discover */
 const DiscoverView = () => import("@/views/discover/DiscoverView.vue");
-const DiscoverHomeView = () => import("@/views/discover/DiscoverHomeView.vue");
+const DiscoverHomeView = () => import("@/views/discover/discoverhome/DiscoverHomeView.vue");
 const DiscoverSonglistView = () =>
   import("@/views/discover/DiscoverSonglistView.vue");
 

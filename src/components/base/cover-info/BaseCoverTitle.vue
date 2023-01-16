@@ -1,5 +1,8 @@
 <template>
-  <p :class="{ 'one-line': oneLine }" :style="titleStyle">
+  <p
+    :class="{ 'one-line': oneLine, 'cursor-pointer': cursorPointer }"
+    :style="titleStyle"
+  >
     {{ name }}
     <span class="alias" v-for="alias in aliases">{{ `（${alias}）` }}</span>
   </p>
@@ -13,6 +16,7 @@ const props = defineProps<{
   oneLine?: boolean;
   aliases?: string[];
   fontSize?: number;
+  cursorPointer?: boolean;
 }>();
 
 const titleStyle = computed(() => {
@@ -25,9 +29,9 @@ const titleStyle = computed(() => {
 <style lang="less" scoped>
 p {
   font-size: 14px;
-  cursor: pointer;
   margin-top: 9px;
   color: var(--primary-route-font-color);
+  font-weight: 300;
   &:hover {
     color: var(--primary-hover-route-font-color);
   }
@@ -38,6 +42,10 @@ p {
   }
   .alias {
     color: #9f9f9f;
+  }
+
+  &.cursor-pointer {
+    cursor: pointer;
   }
 }
 </style>
